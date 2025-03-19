@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .example-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .example-button {
+            padding: 6px 12px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .example-button:hover {
+            background-color: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiplication Table Calculator</h1>
+    
+    <div class="example-numbers">
+        <span>Quick Select: </span>
+        <button class="example-button" onclick="generateTable(2)">2</button>
+        <button class="example-button" onclick="generateTable(4)">4</button>
+        <button class="example-button" onclick="generateTable(6)">6</button>
+        <button class="example-button" onclick="generateTable(8)">8</button>
+        <button class="example-button" onclick="generateTable(10)">10</button>
+        <button class="example-button" onclick="generateTable(12)">12</button>
+        <button class="example-button" onclick="generateTable(16)">16</button>
+        <button class="example-button" onclick="generateTable(32)">32</button>
+        <button class="example-button" onclick="generateTable(64)">64</button>
+    </div>
+    
+    <div class="input-container">
+        <input type="number" id="numberInput" placeholder="Enter a number">
+        <button onclick="generateTableFromInput()">Generate Table</button>
+    </div>
+    
+    <div id="tableContainer"></div>
+    
+    <script>
+        // Generate table when the page loads with default value
+        window.onload = function() {
+            generateTable(2);
+        };
+        
+        function generateTableFromInput() {
+            const input = document.getElementById('numberInput').value;
+            if (input && !isNaN(input)) {
+                generateTable(Number(input));
+            } else {
+                alert("Please enter a valid number");
+            }
+        }
+        
+        function generateTable(number) {
+            document.getElementById('numberInput').value = number;
+            const tableContainer = document.getElementById('tableContainer');
+            
+            let tableHTML = `
+                <h2>Multiplication Table for ${number}</h2>
+                <table>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Result</th>
+                    </tr>
+            `;
+            
+            for (let i = 1; i <= 20; i++) {
+                tableHTML += `
+                    <tr>
+                        <td>${number} × ${i}</td>
+                        <td>${number * i}</td>
+                    </tr>
+                `;
+            }
+            
+            tableHTML += '</table>';
+            tableContainer.innerHTML = tableHTML;
+        }
+    </script>
+</body>
+</html>
